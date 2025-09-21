@@ -11,19 +11,20 @@ public class ExampleAggregate : AggregateRoot<Guid>
 
     protected ExampleAggregate() { }
 
-    private ExampleAggregate(Guid id, string exampleText, ExampleValueObject exampleValueObject)
+    private ExampleAggregate(Guid id, string exampleText, ExampleValueObject exampleValueObject, ExampleEnum exampleStatus)
     {
         Id = id;
         ExampleText = exampleText ?? throw new ArgumentNullException(nameof(exampleText));
         ExampleValueObject = exampleValueObject ?? throw new ArgumentNullException(nameof(exampleValueObject));
+        ExampleStatus = exampleStatus;
 
         AddDomainEvent(ExampleCreatedEvent.Of(exampleText));
     }
 
-    public static ExampleAggregate Create(string exampleText, ExampleValueObject exampleValueObject, Guid? id = null)
+    public static ExampleAggregate Create(string exampleText, ExampleValueObject exampleValueObject, ExampleEnum exampleStatus, Guid? id = null)
     {
         var aggregateId = id ?? Guid.NewGuid();
-        return new ExampleAggregate(aggregateId, exampleText, exampleValueObject);
+        return new ExampleAggregate(aggregateId, exampleText, exampleValueObject, exampleStatus);
     }
 
     public void AddItem(string exampleText)

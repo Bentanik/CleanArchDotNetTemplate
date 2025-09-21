@@ -1,4 +1,4 @@
-namespace _Project_.Application.Interfaces;
+namespace _Project_.Application.Interfaces.DomainEvents;
 
 public interface IDomainEventHandler<TDomainEvent>
     where TDomainEvent : IDomainEvent

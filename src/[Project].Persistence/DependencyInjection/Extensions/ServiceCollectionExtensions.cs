@@ -2,14 +2,17 @@ namespace _Project_.Persistence.DependencyInjection.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    private static IServiceCollection AddDatabaseConfiguration(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDatabaseConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         var databaseSettings = configuration.GetSection(DatabaseSettings.SectionName).Get<DatabaseSettings>();
 
         if (databaseSettings == null || string.IsNullOrWhiteSpace(databaseSettings.ConnectionString))
-            throw new InvalidOperationException($"Database settings are not configured. Make sure '{DatabaseSettings.SectionName}' section exists and has a valid ConnectionString.");
+        {
+            throw new InvalidOperationException(
+                $"Database settings are not configured. Make sure the '{DatabaseSettings.SectionName}' section exists and has a valid ConnectionString.");
+        }
 
-        services.AddDbContext<AppDbContext>((sp, options) =>
+        services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlite(databaseSettings.ConnectionString);
         });
@@ -20,6 +23,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDatabaseConfiguration(configuration);
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>()
+            .AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
+
         return services;
     }
 }

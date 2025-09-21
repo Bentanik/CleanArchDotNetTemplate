@@ -7,3 +7,5 @@ global using MediatR;
 global using _Project_.Contracts.Abstractions.Shared;
 global using _Project_.Contracts.Abstractions.Message;
 global using _Project_.Contracts.Attributes;
+global using _Project_.Contracts.Enums;
+

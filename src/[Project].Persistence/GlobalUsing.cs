@@ -6,10 +6,14 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.EntityFrameworkCore.Storage;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using System.Linq.Expressions;
 
 // Project namespaces
 global using _Project_.Domain.Entities;
+global using _Project_.Application.Interfaces.DomainEvents;
 global using _Project_.Application.Interfaces;
+global using _Project_.Application.Interfaces.Repositories;
 global using _Project_.Domain.Abstractions.Base;
 global using _Project_.Contracts.Settings;
 global using _Project_.Domain.Abstractions.Interfaces;
+global using _Project_.Persistence.Repositories;
