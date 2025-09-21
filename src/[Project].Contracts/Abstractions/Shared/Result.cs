@@ -17,9 +17,9 @@ public abstract class Result
     public static Failure Failure(IEnumerable<Error> errors)
         => new(errors);
 
-    public static Failure<T> Failure<T>(string code, string message)
-        => new(code, message);
+    public static Failure<T> Failure<T>(T data, string code, string message)
+        => new(data, code, message);
 
-    public static Failure<T> Failure<T>(IEnumerable<Error> errors)
-        => new(errors);
+    public static Failure<T> Failure<T>(T data, IEnumerable<Error> errors)
+        => new(data, errors);
 }

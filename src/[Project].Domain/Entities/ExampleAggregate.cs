@@ -29,7 +29,8 @@ public class ExampleAggregate : AggregateRoot<Guid>
 
     public void AddItem(string exampleText)
     {
-        var item = new ExampleItemEntity(exampleText);
+        var item = new ExampleItemEntity(exampleText: exampleText, exampleId: this.Id);
+
         _items.Add(item);
     }
 }

@@ -2,6 +2,15 @@
 
 public class Failure<T> : Failure
 {
-    internal Failure(IEnumerable<Error> errors) : base(errors) { }
-    internal Failure(string code, string message) : base(code, message) { }
+    public T Data { get; }
+
+    internal Failure(T data, IEnumerable<Error> errors) : base(errors)
+    {
+        Data = data;
+    }
+
+    internal Failure(T data, string code, string message) : base(code, message)
+    {
+        Data = data;
+    }
 }

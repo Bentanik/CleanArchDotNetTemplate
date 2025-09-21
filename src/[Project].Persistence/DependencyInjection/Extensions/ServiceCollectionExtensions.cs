@@ -20,12 +20,20 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services
+        .AddScoped<IUnitOfWork, UnitOfWork>()
+        .AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>))
+        .AddScoped<IExampleAggregateRepository, ExampleAggregateRepository>();
+
+        return services;
+    }
+
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDatabaseConfiguration(configuration);
-
-        services.AddScoped<IUnitOfWork, UnitOfWork>()
-            .AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
+        services.AddRepositories();
 
         return services;
     }

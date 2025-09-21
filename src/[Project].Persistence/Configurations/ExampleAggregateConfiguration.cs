@@ -19,5 +19,11 @@ public class ExampleAggregateConfiguration : IEntityTypeConfiguration<ExampleAgg
 
         builder.Property(e => e.ExampleStatus)
                .IsRequired();
+
+        builder.HasMany(e => e.Items)
+            .WithOne(i => i.Example)
+            .HasForeignKey(i => i.ExampleId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

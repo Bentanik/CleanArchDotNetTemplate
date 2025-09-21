@@ -4,11 +4,18 @@ public class ExampleItemEntity : BaseEntity<Guid>
 {
     public string ExampleText { get; private set; } = default!;
 
+    // FK
+    public Guid ExampleId { get; private set; }
+
+    // Navigation
+    public ExampleAggregate Example { get; private set; } = default!;
+
     protected ExampleItemEntity() { }
 
-    internal ExampleItemEntity(string exampleText, Guid? id = null)
+    internal ExampleItemEntity(string exampleText, Guid exampleId, Guid? id = null)
     {
         Id = id ?? Guid.NewGuid();
         ExampleText = exampleText ?? throw new ArgumentNullException(nameof(exampleText));
+        ExampleId = exampleId;
     }
 }

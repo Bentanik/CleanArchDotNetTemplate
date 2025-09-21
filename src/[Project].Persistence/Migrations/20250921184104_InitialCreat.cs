@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _Project_.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCreat : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,7 +33,7 @@ namespace _Project_.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     ExampleText = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    ExampleAggregateId = table.Column<Guid>(type: "TEXT", nullable: true),
+                    ExampleId = table.Column<Guid>(type: "TEXT", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
@@ -41,16 +41,17 @@ namespace _Project_.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_ExampleItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExampleItems_Examples_ExampleAggregateId",
-                        column: x => x.ExampleAggregateId,
+                        name: "FK_ExampleItems_Examples_ExampleId",
+                        column: x => x.ExampleId,
                         principalTable: "Examples",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExampleItems_ExampleAggregateId",
+                name: "IX_ExampleItems_ExampleId",
                 table: "ExampleItems",
-                column: "ExampleAggregateId");
+                column: "ExampleId");
         }
 
         /// <inheritdoc />

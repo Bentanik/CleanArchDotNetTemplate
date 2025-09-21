@@ -7,3 +7,4 @@ global using _Project_.Domain.Abstractions.Base;
 global using _Project_.Domain.DomainEvents;
 global using _Project_.Domain.ValueObjects;
 global using _Project_.Domain.Enums;
+global using _Project_.Domain.Exceptions;

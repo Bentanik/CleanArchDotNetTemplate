@@ -11,8 +11,8 @@ using _Project_.Persistence;
 namespace _Project_.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250921143502_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250921184104_InitialCreat")]
+    partial class InitialCreat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace _Project_.Persistence.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("ExampleAggregateId")
+                    b.Property<Guid>("ExampleId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ExampleText")
@@ -67,7 +67,7 @@ namespace _Project_.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExampleAggregateId");
+                    b.HasIndex("ExampleId");
 
                     b.ToTable("ExampleItems");
                 });
@@ -98,9 +98,13 @@ namespace _Project_.Persistence.Migrations
 
             modelBuilder.Entity("_Project_.Domain.Entities.ExampleItemEntity", b =>
                 {
-                    b.HasOne("_Project_.Domain.Entities.ExampleAggregate", null)
+                    b.HasOne("_Project_.Domain.Entities.ExampleAggregate", "Example")
                         .WithMany("Items")
-                        .HasForeignKey("ExampleAggregateId");
+                        .HasForeignKey("ExampleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Example");
                 });
 
             modelBuilder.Entity("_Project_.Domain.Entities.ExampleAggregate", b =>
