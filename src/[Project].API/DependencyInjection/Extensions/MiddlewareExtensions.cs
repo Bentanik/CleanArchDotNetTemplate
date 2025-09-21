@@ -1,4 +1,6 @@
-﻿namespace _Project_.API.DependencyInjection.Extensions;
+﻿using _Project_.Presentation.Endpoints.V1;
+
+namespace _Project_.API.DependencyInjection.Extensions;
 
 public static class MiddlewareExtensions
 {
@@ -12,8 +14,8 @@ public static class MiddlewareExtensions
 
     app.MapCarter();
 
-    // app.NewVersionedApi("User")
-    //   .MapUserApiV1();
+    app.NewVersionedApi()
+      .MapExampleEndpointApiV1();
 
     app.UseMiddleware<ExceptionHandlingMiddleware>();
 
