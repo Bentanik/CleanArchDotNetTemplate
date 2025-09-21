@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Bentanik",
+    "classifications": [
+        "Clean Architecture",
+        "EF Core",
+        "CQRS",
+        "DDD"
+    ],
+    "identity": "CleanArchEFCoreCQRSDDD",
+    "name": "Clean Architecture Template (NET) with EF Core, CQRS, DDD",
+    "shortName": "cleanarch-ef-ddd",
+    "sourceName": "_Project_",
+    "tags": {
+        "language": "C#",
+        "type": "project",
+        "framework": "NET"
+    },
+    "preferNameDirectory": true
+}
