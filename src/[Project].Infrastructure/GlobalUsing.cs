@@ -8,3 +8,6 @@ global using _Project_.Application.Interfaces.DomainEvents;
 global using _Project_.Domain.Abstractions.Interfaces;
 global using _Project_.Domain.DomainEvents;
 global using _Project_.Infrastructure.DomainEvents;
+global using _Project_.Application.Interfaces.IdempotencyStore;
+global using _Project_.Infrastructure.IdempotencyStore;
+global using _Project_.Application.Interfaces;

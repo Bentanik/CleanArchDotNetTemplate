@@ -4,7 +4,10 @@ public static class SwaggerExtensions
 {
     public static void AddSwagger(this IServiceCollection services)
     {
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options =>
+        {
+            options.OperationFilter<AddXRequestIdHeaderParameter>();
+        });
         services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
     }
 

@@ -1,5 +1,4 @@
 namespace _Project_.API.DependencyInjection.Extensions;
-
 public static class ServiceCollectionExtensions
 {
     private static IServiceCollection AddConfigurationAppSetting
@@ -24,6 +23,7 @@ public static class ServiceCollectionExtensions
                 typeof(Application.AssemblyReference).Assembly,
                 typeof(Infrastructure.AssemblyReference).Assembly
             ))
+            .AddTransient(typeof(IPipelineBehavior<,>), typeof(IdempotencyBehavior<,>))
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>))
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(DomainEventDispatcherBehavior<,>))
             .AddValidatorsFromAssembly(Contracts.AssemblyReference.Assembly, includeInternalTypes: true);

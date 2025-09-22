@@ -21,6 +21,7 @@ global using _Project_.Contracts.Enums;
 global using _Project_.Contracts.Attributes;
 global using _Project_.Contracts.Messages;
 global using _Project_.Contracts.DTOs;
+global using _Project_.Application.Interfaces.IdempotencyStore;
 global using static _Project_.Domain.Exceptions.ExampleException;
 
 

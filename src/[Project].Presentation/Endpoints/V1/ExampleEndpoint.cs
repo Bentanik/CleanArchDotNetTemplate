@@ -1,3 +1,4 @@
+using _Project_.Application.Interfaces;
 using _Project_.Contracts.UseCases.ExampleUseCase.Commands;
 using _Project_.Presentation.Schemas.V1.Example.Requests;
 
@@ -26,9 +27,13 @@ public static class ExampleEndpoint
 
     private static async Task<IResult> HandleCreateExampleAsync(
         ISender sender,
+        IRequestContext requestContext,
         [FromBody] CreateExampleRequest request)
     {
+        string requestId = requestContext.GetIdempotencyKey() 
+            ?? throw new ArgumentException("X-Request-Id header must be provided for idempotent requests.");
         var command = new CreateExampleCommand(
+            RequestId: requestId,
             ExampleText: request.ExampleText,
             ExampleValueObjectText: request.ExampleValueObjectText,
             ExampleStatus: request.ExampleStatus
