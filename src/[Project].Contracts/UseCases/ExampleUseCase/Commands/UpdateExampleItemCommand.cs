@@ -1,4 +1,4 @@
 namespace _Project_.Contracts.UseCases.ExampleUseCase.Commands;
 
-public record UpdateExampleItemCommand(Guid ExampleId, Guid ExampleItemId, string ExampleItemText)
+public record DeleteExampleItemCommand(Guid ExampleId, Guid ExampleItemId)
     : ICommand;

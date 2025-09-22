@@ -1,19 +1,19 @@
 namespace _Project_.Domain.DomainEvents;
 
-public class ExampleItemUpdatedEvent : DomainEvent
+public class ExampleItemDeletedEvent : DomainEvent
 {
     public string Value { get; }
 
-    private ExampleItemUpdatedEvent(string value)
+    private ExampleItemDeletedEvent(string value)
     {
         Value = value;
     }
 
-    public static ExampleItemUpdatedEvent Of(string value)
+    public static ExampleItemDeletedEvent Of(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
             throw new ArgumentException("Value cannot be empty", nameof(value));
 
-        return new ExampleItemUpdatedEvent(value);
+        return new ExampleItemDeletedEvent(value);
     }
 }

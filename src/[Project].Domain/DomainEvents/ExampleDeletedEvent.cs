@@ -12,7 +12,7 @@ public class ExampleDeletedEvent : DomainEvent
     public static ExampleDeletedEvent Of(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("ExampleText cannot be empty", nameof(value));
+            throw new ArgumentException("Value cannot be empty", nameof(value));
 
         return new ExampleDeletedEvent(value);
     }

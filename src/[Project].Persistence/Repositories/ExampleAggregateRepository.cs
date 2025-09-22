@@ -1,4 +1,4 @@
-namespace _Project_.Persistence.Repositories;
+﻿namespace _Project_.Persistence.Repositories;
 
 public class ExampleAggregateRepository
     : RepositoryBase<ExampleAggregate, Guid>, IExampleAggregateRepository
@@ -41,15 +41,16 @@ public class ExampleAggregateRepository
         CancellationToken cancellationToken = default)
     {
         var aggregate = await _context.Set<ExampleAggregate>()
-        .Where(x => x.Id == id)
-        .Include(x => x.Items.Where(i => i.Id == exampleItemId))
-        .Select(x => new
-        {
-            Aggregate = x,
-            IsDuplicateExampleItemText = exampleText != null && x.Items.Any(i => i.Id != exampleItemId && i.ExampleText == exampleText)
-        })
-        .FirstOrDefaultAsync(cancellationToken);
-
+            .Where(x => x.Id == id)
+            .Select(x => new
+            {
+                Aggregate = x,
+                ExampleItem = x.Items.FirstOrDefault(i => i.Id == exampleItemId),
+                IsDuplicateExampleItemText = exampleText != null &&
+                                             x.Items.Any(i => i.ExampleText == exampleText)
+            })
+            .FirstOrDefaultAsync(cancellationToken);
+            
         if (aggregate == null)
             return (null, false);
 

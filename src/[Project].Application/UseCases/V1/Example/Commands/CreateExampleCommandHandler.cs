@@ -28,7 +28,7 @@ public sealed class CreateExampleCommandHandler : ICommandHandler<CreateExampleC
             exampleValue: command.ExampleValueObjectText
         );
 
-        var exampleStatus = command.ExampleStatus.ToEnum<ExampleEnumDto, ExampleEnum>();
+        var exampleStatus = command.ExampleStatus.ToEnum<ExampleStatusEnumDto, ExampleStatusEnum>();
 
         var exampleAggregate = ExampleAggregate.Create(
             exampleText: command.ExampleText,

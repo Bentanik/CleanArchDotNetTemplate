@@ -1,6 +1,6 @@
 namespace _Project_.Contracts.Enums;
 
-public enum ExampleEnumDto
+public enum ExampleStatusEnumDto
 {
     [Description("Ex1")]
     Ex1 = 0,

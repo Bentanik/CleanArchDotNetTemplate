@@ -36,10 +36,10 @@ public sealed class UpdateExampleCommandHandler : ICommandHandler<UpdateExampleC
             exampleValueObject = ExampleValueObject.Of(command.ExampleValueObjectText);
         }
 
-        ExampleEnum? exampleStatus = null;
+        ExampleStatusEnum? exampleStatus = null;
         if (command.ExampleStatus.HasValue)
         {
-            exampleStatus = command.ExampleStatus.ToEnumNullable<ExampleEnumDto, ExampleEnum>();
+            exampleStatus = command.ExampleStatus.ToEnumNullable<ExampleStatusEnumDto, ExampleStatusEnum>();
         }
 
         exampleAggregate.Update(

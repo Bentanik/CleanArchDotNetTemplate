@@ -12,7 +12,7 @@ public class ExampleCreatedEvent : DomainEvent
     public static ExampleCreatedEvent Of(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
-            throw new ArgumentException("ExampleText cannot be empty", nameof(value));
+            throw new ArgumentException("Value cannot be empty", nameof(value));
 
         return new ExampleCreatedEvent(value);
     }
