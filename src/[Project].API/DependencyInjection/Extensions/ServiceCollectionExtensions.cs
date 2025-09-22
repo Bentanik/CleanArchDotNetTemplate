@@ -21,7 +21,8 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddConfigureMediatR(this IServiceCollection services)
     {
         services.AddMediatR(config => config.RegisterServicesFromAssemblies(
-                typeof(Application.AssemblyReference).Assembly
+                typeof(Application.AssemblyReference).Assembly,
+                typeof(Infrastructure.AssemblyReference).Assembly
             ))
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionBehavior<,>))
             .AddTransient(typeof(IPipelineBehavior<,>), typeof(DomainEventDispatcherBehavior<,>))
