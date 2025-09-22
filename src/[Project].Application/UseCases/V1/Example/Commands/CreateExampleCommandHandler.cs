@@ -15,6 +15,15 @@ public sealed class CreateExampleCommandHandler : ICommandHandler<CreateExampleC
 
     public async Task<Result> Handle(CreateExampleCommand command, CancellationToken cancellationToken)
     {
+        var exist = await _exampleAggregateRepo.AnyAsync(predicate: ex => ex.ExampleText == command.ExampleText
+        , cancellationToken: cancellationToken);
+
+        if (exist == true)
+        {
+            return Result.Failure(code: ExampleMessages.DuplicateExampleText.GetMessage().Code,
+                                message: ExampleMessages.DuplicateExampleText.GetMessage().Message, data: command.ExampleText);
+        }
+
         var exampleValueObject = ExampleValueObject.Of(
             exampleValue: command.ExampleValueObjectText
         );
@@ -32,5 +41,4 @@ public sealed class CreateExampleCommandHandler : ICommandHandler<CreateExampleC
 
         return Result.Success(code: ExampleMessages.CreatedSuccessfully.GetMessage().Code, message: ExampleMessages.CreatedSuccessfully.GetMessage().Message);
     }
-
 }

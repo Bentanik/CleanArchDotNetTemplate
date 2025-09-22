@@ -15,6 +15,8 @@ public static class ExampleEndpoint
 
         group.MapPost(string.Empty, HandleCreateExampleAsync);
         group.MapPost("{exampleId}/example_items", HandleCreateExampleItemsAsync);
+        group.MapPut("{exampleId}", HandleUpdateExampleAsync);
+        group.MapDelete("{exampleId}", HandleDeleteExampleAsync);
 
         return builder;
     }
@@ -40,6 +42,34 @@ public static class ExampleEndpoint
         var command = new CreateExampleItemsCommand(
             ExampleId: exampleId,
             ExampleItems: request.ExampleItems
+        );
+
+        var result = await sender.Send(command);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+    }
+
+    private static async Task<IResult> HandleUpdateExampleAsync(
+    ISender sender,
+    [FromRoute] Guid exampleId,
+    [FromBody] UpdateExampleRequest request)
+    {
+        var command = new UpdateExampleCommand(
+            ExampleId: exampleId,
+            ExampleText: request.ExampleText,
+            ExampleValueObjectText: request.ExampleValueObjectText,
+            ExampleStatus: request.ExampleStatus
+        );
+
+        var result = await sender.Send(command);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+    }
+
+    private static async Task<IResult> HandleDeleteExampleAsync(
+    ISender sender,
+    [FromRoute] Guid exampleId)
+    {
+        var command = new DeleteExampleCommand(
+            ExampleId: exampleId
         );
 
         var result = await sender.Send(command);

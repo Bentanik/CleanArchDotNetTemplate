@@ -5,20 +5,20 @@ namespace _Project_.Application.UseCases.V1.Example.Commands;
 public sealed class CreateExampleItemsCommandHandler : ICommandHandler<CreateExampleItemsCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IExampleAggregateRepository _exampleRepo;
+    private readonly IExampleAggregateRepository _exampleAggregateRepo;
     private readonly IRepositoryBase<ExampleItemEntity, Guid> _exampleItemRepo;
 
 
     public CreateExampleItemsCommandHandler(IUnitOfWork unitOfWork, IExampleAggregateRepository exampleAggregateRepo, IRepositoryBase<ExampleItemEntity, Guid> exampleItemRepo)
     {
         _unitOfWork = unitOfWork;
-        _exampleRepo = exampleAggregateRepo;
+        _exampleAggregateRepo = exampleAggregateRepo;
         _exampleItemRepo = exampleItemRepo;
     }
 
     public async Task<Result> Handle(CreateExampleItemsCommand command, CancellationToken cancellationToken)
     {
-        var exampleAggregate = await _exampleRepo.FindByIdWithItemsAsync(command.ExampleId, cancellationToken);
+        var exampleAggregate = await _exampleAggregateRepo.FindByIdWithItemsAsync(command.ExampleId, cancellationToken);
 
         if (exampleAggregate == null)
         {

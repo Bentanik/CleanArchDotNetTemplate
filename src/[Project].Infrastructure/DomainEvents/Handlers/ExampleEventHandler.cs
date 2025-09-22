@@ -1,10 +1,10 @@
 namespace _Project_.Infrastructure.DomainEvents.Handlers;
 
-public class ExampleCreatedEventHandler : IDomainEventHandler<ExampleCreatedEvent>
+public class ExampleEventHandler : IDomainEventHandler<ExampleCreatedEvent>
 {
     public Task Handle(ExampleCreatedEvent domainEvent, CancellationToken cancellationToken = default)
     {
-        Console.WriteLine($"Example created: {domainEvent.ExampleText}");
+        Console.WriteLine($"Example created: {domainEvent.Value}");
         return Task.CompletedTask;
     }
 }

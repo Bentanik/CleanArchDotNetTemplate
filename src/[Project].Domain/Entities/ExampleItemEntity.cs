@@ -18,4 +18,9 @@ public class ExampleItemEntity : BaseEntity<Guid>
         ExampleText = exampleText ?? throw new ArgumentNullException(nameof(exampleText));
         ExampleId = exampleId;
     }
+
+    public void UpdateExampleText(string exampleText)
+    {
+        ExampleText = exampleText ?? throw new ArgumentNullException(nameof(exampleText));
+    }
 }

@@ -3,13 +3,11 @@ namespace _Project_.Persistence;
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
     private readonly AppDbContext _dbContext;
-    private readonly IDomainEventDispatcher _dispatcher;
     private IDbContextTransaction? _currentTransaction;
 
-    public UnitOfWork(AppDbContext dbContext, IDomainEventDispatcher dispatcher)
+    public UnitOfWork(AppDbContext dbContext)
     {
         _dbContext = dbContext;
-        _dispatcher = dispatcher;
     }
 
     public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
@@ -51,7 +49,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        // 1. Update audit fields
         var date = DateTime.UtcNow;
         foreach (var entry in _dbContext.ChangeTracker.Entries<IBaseEntity>())
         {
@@ -62,21 +59,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
                 entry.Entity.ModifiedDate = date;
         }
 
-        // 2. Save changes to database
-        var result = await _dbContext.SaveChangesAsync(cancellationToken);
-
-        // 3. Dispatch domain events
-        var aggregates = GetTrackedAggregates();
-        foreach (var aggregate in aggregates)
-        {
-            var events = aggregate.DomainEvents.ToList();
-            aggregate.ClearDomainEvents();
-
-            foreach (var domainEvent in events)
-                await _dispatcher.DispatchAsync(domainEvent, cancellationToken);
-        }
-
-        return result;
+        return await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
     public IReadOnlyList<AggregateRoot<Guid>> GetTrackedAggregates()

@@ -20,13 +20,11 @@ public class DomainEventDispatcherBehavior<TRequest, TResponse> : IPipelineBehav
 
         foreach (var aggregate in aggregates)
         {
-            var events = aggregate.DomainEvents.ToList();
-            aggregate.ClearDomainEvents();
-
-            foreach (var domainEvent in events)
+            foreach (var evt in aggregate.DomainEvents.ToList())
             {
-                await _dispatcher.DispatchAsync(domainEvent, cancellationToken);
+                await _dispatcher.DispatchAsync(evt, cancellationToken);
             }
+            aggregate.ClearDomainEvents();
         }
 
         return response;

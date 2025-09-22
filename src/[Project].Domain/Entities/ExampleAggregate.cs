@@ -33,4 +33,31 @@ public class ExampleAggregate : AggregateRoot<Guid>
 
         _items.Add(item);
     }
+
+    public void Update(string? exampleText = null, ExampleValueObject? exampleValueObject = null, ExampleEnum? exampleStatus = null)
+    {
+        if (!string.IsNullOrWhiteSpace(exampleText))
+            ExampleText = exampleText;
+
+        if (exampleValueObject != null)
+            ExampleValueObject = exampleValueObject;
+
+        if (exampleStatus.HasValue)
+            ExampleStatus = exampleStatus.Value;
+
+        AddDomainEvent(ExampleUpdatedEvent.Of(Id.ToString()));
+    }
+
+    public void Delete()
+    {
+        AddDomainEvent(ExampleDeletedEvent.Of(Id.ToString()));
+    }
+
+    public void UpdateItem(Guid itemId, string exampleText)
+    {
+        var item = _items.FirstOrDefault(x => x.Id == itemId) ?? throw new InvalidOperationException("Item not found");
+        item.UpdateExampleText(exampleText);
+
+        AddDomainEvent(ExampleItemUpdatedEvent.Of(itemId.ToString()));
+    }
 }

@@ -5,7 +5,6 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection RegisterDomainEventServices(this IServiceCollection services)
     {
         services.AddScoped<IDomainEventDispatcher, DomainEventDispatcher>();
-        services.AddScoped(typeof(INotificationHandler<>), typeof(DomainEventHandlerAdapter<>));
         return services;
     }
 

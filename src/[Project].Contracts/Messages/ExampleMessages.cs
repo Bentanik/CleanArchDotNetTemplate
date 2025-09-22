@@ -6,5 +6,11 @@ public enum ExampleMessages
     CreatedSuccessfully,
 
     [Message("Duplicate example text", "EXAMPLE_02")]
-    DuplicateExampleText
+    DuplicateExampleText,
+
+    [Message("Updated successfully", "EXAMPLE_03")]
+    UpdatedSuccessfully,
+
+    [Message("Deleted successfully", "EXAMPLE_04")]
+    DeletedSuccessfully,
 }

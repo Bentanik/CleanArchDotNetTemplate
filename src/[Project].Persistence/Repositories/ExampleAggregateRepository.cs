@@ -12,4 +12,47 @@ public class ExampleAggregateRepository
             .Include(e => e.Items)
             .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
+
+    public async Task<(ExampleAggregate? Aggregate, bool IsDuplicateText)> FindByIdAndCheckDuplicateExampleTextAsync(
+    Guid id, string? exampleText = null, CancellationToken cancellationToken = default)
+    {
+        var query = _context.Set<ExampleAggregate>();
+
+        var result = await query
+            .Where(x => x.Id == id)
+            .Select(x => new
+            {
+                Aggregate = x,
+                IsDuplicateText = exampleText != null && query.Any(y => y.Id != id && y.ExampleText == exampleText)
+            })
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (result == null)
+            return (null, false);
+
+        return (result.Aggregate, result.IsDuplicateText);
+    }
+
+    public async Task<(ExampleAggregate? Aggregate, bool IsDuplicateExampleItemText)>
+    FindAggregateWithItemAndCheckDuplicateAsync(
+        Guid id,
+        Guid exampleItemId,
+        string? exampleText = null,
+        CancellationToken cancellationToken = default)
+    {
+        var aggregate = await _context.Set<ExampleAggregate>()
+        .Where(x => x.Id == id)
+        .Include(x => x.Items.Where(i => i.Id == exampleItemId))
+        .Select(x => new
+        {
+            Aggregate = x,
+            IsDuplicateExampleItemText = exampleText != null && x.Items.Any(i => i.Id != exampleItemId && i.ExampleText == exampleText)
+        })
+        .FirstOrDefaultAsync(cancellationToken);
+
+        if (aggregate == null)
+            return (null, false);
+
+        return (aggregate.Aggregate, aggregate.IsDuplicateExampleItemText);
+    }
 }
