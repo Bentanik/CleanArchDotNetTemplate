@@ -26,7 +26,7 @@ namespace _Project_.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("CreatedDate")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ExampleStatus")
@@ -37,7 +37,7 @@ namespace _Project_.Persistence.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("ModifiedDate")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -51,7 +51,7 @@ namespace _Project_.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("CreatedDate")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ExampleId")
@@ -62,7 +62,7 @@ namespace _Project_.Persistence.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("ModifiedDate")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

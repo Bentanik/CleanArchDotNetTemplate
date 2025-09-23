@@ -5,10 +5,10 @@ namespace _Project_.Application.UseCases.V1.Example.Commands;
 public sealed class UpdateExampleItemCommandHandler : ICommandHandler<UpdateExampleItemCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IExampleAggregateRepository _exampleAggregateRepo;
-    private readonly IRepositoryBase<ExampleItemEntity, Guid> _exampleItemRepo;
+    private readonly IExampleAggregateCommandRepository _exampleAggregateRepo;
+    private readonly ICommandRepository<ExampleItemEntity, Guid> _exampleItemRepo;
 
-    public UpdateExampleItemCommandHandler(IUnitOfWork unitOfWork, IExampleAggregateRepository exampleAggregateRepo, IRepositoryBase<ExampleItemEntity, Guid> exampleItemRepo)
+    public UpdateExampleItemCommandHandler(IUnitOfWork unitOfWork, IExampleAggregateCommandRepository exampleAggregateRepo, ICommandRepository<ExampleItemEntity, Guid> exampleItemRepo)
     {
         _unitOfWork = unitOfWork;
         _exampleAggregateRepo = exampleAggregateRepo;

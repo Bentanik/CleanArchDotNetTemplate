@@ -10,4 +10,5 @@ global using Microsoft.AspNetCore.Routing;
 // Project namespaces
 global using _Project_.Contracts.Enums;
 global using _Project_.Contracts.DTOs;
+global using _Project_.Application.Interfaces;
 

@@ -1,6 +1,6 @@
 namespace _Project_.Application.Interfaces.Repositories;
 
-public interface IRepositoryBase<TEntity, in TKey> where TEntity : BaseEntity<TKey>
+public interface ICommandRepository<TEntity, in TKey> where TEntity : BaseEntity<TKey>
 {
     Task<IEnumerable<TEntity>> FindAllAsync(
         Expression<Func<TEntity, bool>>? predicate = null,

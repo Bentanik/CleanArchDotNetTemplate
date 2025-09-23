@@ -53,10 +53,10 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         foreach (var entry in _dbContext.ChangeTracker.Entries<IBaseEntity>())
         {
             if (entry.State == EntityState.Added)
-                entry.Entity.CreatedDate = date;
+                entry.Entity.CreatedAt = date;
 
             if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
-                entry.Entity.ModifiedDate = date;
+                entry.Entity.ModifiedAt = date;
         }
 
         return await _dbContext.SaveChangesAsync(cancellationToken);

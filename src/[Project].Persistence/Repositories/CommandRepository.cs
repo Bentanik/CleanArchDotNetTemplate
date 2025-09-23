@@ -1,11 +1,11 @@
 namespace _Project_.Persistence.Repositories;
 
-public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>
+public class CommandRepository<TEntity, TKey> : ICommandRepository<TEntity, TKey>
     where TEntity : BaseEntity<TKey>
 {
     protected readonly AppDbContext _context;
 
-    public RepositoryBase(AppDbContext context)
+    public CommandRepository(AppDbContext context)
     {
         _context = context;
     }

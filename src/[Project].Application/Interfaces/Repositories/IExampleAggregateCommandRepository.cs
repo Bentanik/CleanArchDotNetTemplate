@@ -1,6 +1,6 @@
 namespace _Project_.Application.Interfaces.Repositories;
 
-public interface IExampleAggregateRepository : IRepositoryBase<ExampleAggregate, Guid>
+public interface IExampleAggregateCommandRepository : ICommandRepository<ExampleAggregate, Guid>
 {
     Task<ExampleAggregate?> FindByIdWithItemsAsync(Guid id, CancellationToken cancellationToken = default);
     Task<(ExampleAggregate? Aggregate, bool IsDuplicateText)> FindByIdAndCheckDuplicateExampleTextAsync(
@@ -13,5 +13,5 @@ public interface IExampleAggregateRepository : IRepositoryBase<ExampleAggregate,
        Guid exampleItemId,
        string? exampleText = null,
        CancellationToken cancellationToken = default
-   );
+    );
 }

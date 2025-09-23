@@ -2,8 +2,8 @@
 
 public interface IBaseEntity
 {
-    DateTime? CreatedDate { get; set; }
-    DateTime? ModifiedDate { get; set; }
+    DateTime? CreatedAt { get; set; }
+    DateTime? ModifiedAt { get; set; }
 }
 
 public interface IBaseEntity<T> : IBaseEntity

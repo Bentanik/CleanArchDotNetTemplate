@@ -5,9 +5,9 @@ namespace _Project_.Application.UseCases.V1.Example.Commands;
 public sealed class CreateExampleCommandHandler : ICommandHandler<CreateExampleCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IRepositoryBase<ExampleAggregate, Guid> _exampleAggregateRepo;
+    private readonly ICommandRepository<ExampleAggregate, Guid> _exampleAggregateRepo;
 
-    public CreateExampleCommandHandler(IUnitOfWork unitOfWork, IRepositoryBase<ExampleAggregate, Guid> exampleAggregateRepo)
+    public CreateExampleCommandHandler(IUnitOfWork unitOfWork, ICommandRepository<ExampleAggregate, Guid> exampleAggregateRepo)
     {
         _unitOfWork = unitOfWork;
         _exampleAggregateRepo = exampleAggregateRepo;

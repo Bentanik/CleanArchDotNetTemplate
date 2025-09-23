@@ -1,9 +1,9 @@
 ﻿namespace _Project_.Persistence.Repositories;
 
-public class ExampleAggregateRepository
-    : RepositoryBase<ExampleAggregate, Guid>, IExampleAggregateRepository
+public class ExampleAggregateCommandRepository
+    : CommandRepository<ExampleAggregate, Guid>, IExampleAggregateCommandRepository
 {
-    public ExampleAggregateRepository(AppDbContext dbContext) : base(dbContext) { }
+    public ExampleAggregateCommandRepository(AppDbContext dbContext) : base(dbContext) { }
 
     public async Task<ExampleAggregate?> FindByIdWithItemsAsync(Guid id, CancellationToken cancellationToken = default)
     {

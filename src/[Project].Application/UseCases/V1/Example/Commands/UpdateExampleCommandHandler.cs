@@ -5,9 +5,9 @@ namespace _Project_.Application.UseCases.V1.Example.Commands;
 public sealed class UpdateExampleCommandHandler : ICommandHandler<UpdateExampleCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IExampleAggregateRepository _exampleAggregateRepo;
+    private readonly IExampleAggregateCommandRepository _exampleAggregateRepo;
 
-    public UpdateExampleCommandHandler(IUnitOfWork unitOfWork, IExampleAggregateRepository exampleAggregateRepo)
+    public UpdateExampleCommandHandler(IUnitOfWork unitOfWork, IExampleAggregateCommandRepository exampleAggregateRepo)
     {
         _unitOfWork = unitOfWork;
         _exampleAggregateRepo = exampleAggregateRepo;

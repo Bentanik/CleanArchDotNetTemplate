@@ -1,3 +1,5 @@
+using _Project_.Application.Interfaces.Repositories;
+
 namespace _Project_.Persistence.DependencyInjection.Extensions;
 
 public static class ServiceCollectionExtensions
@@ -24,8 +26,10 @@ public static class ServiceCollectionExtensions
     {
         services
         .AddScoped<IUnitOfWork, UnitOfWork>()
-        .AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>))
-        .AddScoped<IExampleAggregateRepository, ExampleAggregateRepository>();
+        .AddScoped(typeof(ICommandRepository<,>), typeof(CommandRepository<,>))
+        .AddScoped(typeof(IQueryRepository<>), typeof(QueryRepository<>))
+        .AddScoped<IExampleAggregateCommandRepository, ExampleAggregateCommandRepository>()
+        .AddScoped<IExampleAggregateQueryRepository, ExampleAggregateQueryRepository>();
 
         return services;
     }

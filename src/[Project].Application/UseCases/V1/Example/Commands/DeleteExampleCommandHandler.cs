@@ -5,9 +5,9 @@ namespace _Project_.Application.UseCases.V1.Example.Commands;
 public sealed class DeleteExampleCommandHandler : ICommandHandler<DeleteExampleCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IExampleAggregateRepository _exampleAggregateRepo;
+    private readonly IExampleAggregateCommandRepository _exampleAggregateRepo;
 
-    public DeleteExampleCommandHandler(IUnitOfWork unitOfWork, IExampleAggregateRepository exampleAggregateRepo)
+    public DeleteExampleCommandHandler(IUnitOfWork unitOfWork, IExampleAggregateCommandRepository exampleAggregateRepo)
     {
         _unitOfWork = unitOfWork;
         _exampleAggregateRepo = exampleAggregateRepo;

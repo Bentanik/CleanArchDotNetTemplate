@@ -3,6 +3,6 @@
 public abstract class BaseEntity<T> : IBaseEntity<T>
 {
     public T Id { get; set; } = default!;
-    public DateTime? CreatedDate { get; set; }
-    public DateTime? ModifiedDate { get; set; }
+    public DateTime? CreatedAt { get; set; }
+    public DateTime? ModifiedAt { get; set; }
 }

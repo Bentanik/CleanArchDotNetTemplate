@@ -17,3 +17,5 @@ global using _Project_.Domain.Abstractions.Base;
 global using _Project_.Contracts.Settings;
 global using _Project_.Domain.Abstractions.Interfaces;
 global using _Project_.Persistence.Repositories;
+global using _Project_.Contracts.DTOs;
+global using _Project_.Contracts.Enums;
