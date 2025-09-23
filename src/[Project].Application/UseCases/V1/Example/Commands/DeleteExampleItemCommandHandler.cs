@@ -25,8 +25,10 @@ public sealed class DeleteExampleItemCommandHandler : ICommandHandler<DeleteExam
         
         if (exampleAggregate == null)
         {
-            return Result.Failure(code: AppMessages.NotFound.GetMessage().Code,
+            var error = new Error(code: AppMessages.NotFound.GetMessage().Code,
                                 message: AppMessages.NotFound.GetMessage().Message);
+
+            return Result.Failure([error]);
         }
 
         exampleAggregate.DeleteItem(

@@ -25,14 +25,18 @@ public sealed class UpdateExampleItemCommandHandler : ICommandHandler<UpdateExam
 
         if (exampleAggregate == null)
         {
-            return Result.Failure(code: AppMessages.NotFound.GetMessage().Code,
-                                message: AppMessages.NotFound.GetMessage().Message);
+            var error = new Error(code: AppMessages.NotFound.GetMessage().Code,
+                                 message: AppMessages.NotFound.GetMessage().Message);
+
+            return Result.Failure([error]);
         }
 
         if (isDuplicateText == true)
         {
-            return Result.Failure(code: ExampleMessages.DuplicateExampleText.GetMessage().Code,
+            var error = new Error<string>(code: ExampleMessages.DuplicateExampleText.GetMessage().Code,
                                 message: ExampleMessages.DuplicateExampleText.GetMessage().Message, data: command.ExampleItemText);
+
+            return Result.Failure([error]);
         }
 
         exampleAggregate.UpdateItem(

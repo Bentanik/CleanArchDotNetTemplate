@@ -1,16 +1,12 @@
 ﻿namespace _Project_.Contracts.Abstractions.Shared;
 
-public class Failure<T> : Failure
+public class Failure<T> : Result<T>
 {
-    public T Data { get; }
+    public IReadOnlyList<Error> Errors { get; }
 
-    internal Failure(T data, IEnumerable<Error> errors) : base(errors)
+    internal Failure(IEnumerable<Error> errors)
     {
-        Data = data;
-    }
-
-    internal Failure(T data, string code, string message) : base(code, message)
-    {
-        Data = data;
+        IsSuccess = false;
+        Errors = [.. errors];
     }
 }

@@ -22,21 +22,25 @@ public sealed class CreateExampleItemsCommandHandler : ICommandHandler<CreateExa
 
         if (exampleAggregate == null)
         {
-            return Result.Failure(code: AppMessages.NotFound.GetMessage().Code,
+            var error = new Error(code: AppMessages.NotFound.GetMessage().Code,
                                 message: AppMessages.NotFound.GetMessage().Message);
+
+            return Result.Failure([error]);
         }
 
         var duplicates = ValidateBeforeCreate(exampleItems: command.ExampleItems, existingItems: exampleAggregate.Items);
 
         if (duplicates.Count != 0)
         {
-            return Result.Failure(code: ExampleMessages.DuplicateExampleText.GetMessage().Code,
+            var error = new Error<List<ExampleItemDto>>(code: ExampleMessages.DuplicateExampleText.GetMessage().Code,
                                 message: ExampleMessages.DuplicateExampleText.GetMessage().Message, data: duplicates);
+
+            return Result.Failure([error]);
         }
 
         foreach (var itemDto in command.ExampleItems)
         {
-            exampleAggregate.AddItem(itemDto.ExampleText);
+            exampleAggregate.AddItem(itemDto.ExampleText!);
             var item = exampleAggregate.Items.Last();
             await _exampleItemRepo.AddAsync(item, cancellationToken);
         }

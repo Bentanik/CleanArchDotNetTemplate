@@ -10,6 +10,6 @@ public class Failure : Result
         Errors = [.. errors];
     }
 
-    internal Failure(string code, string message)
-        : this([new Error(code, message)]) { }
+    internal Failure(Error error)
+        : this([error]) { }
 }

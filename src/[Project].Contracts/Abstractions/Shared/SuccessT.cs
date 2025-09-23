@@ -1,15 +1,16 @@
 ﻿namespace _Project_.Contracts.Abstractions.Shared;
 
-public sealed class Success<T> : Result<T>
+public class Success<T> : Result<T>
 {
     public string Code { get; }
     public string Message { get; }
+    public T Data { get; }
 
-    internal Success(T data, string code = "200", string message = "Success")
+    internal Success(T data, string code, string message)
     {
         IsSuccess = true;
-        Data = data;
         Code = code;
         Message = message;
+        Data = data;
     }
 }

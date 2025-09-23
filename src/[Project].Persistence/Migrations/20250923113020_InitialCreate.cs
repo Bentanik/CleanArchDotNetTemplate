@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace _Project_.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreat : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,8 +19,8 @@ namespace _Project_.Persistence.Migrations
                     ExampleText = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     ExampleValueObject_ExampleValue = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     ExampleStatus = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,8 +34,8 @@ namespace _Project_.Persistence.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     ExampleText = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
                     ExampleId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

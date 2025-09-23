@@ -17,12 +17,13 @@ public static class ExampleEndpoint
         group.MapPost(string.Empty, HandleCreateExampleAsync);
         group.MapPut("{exampleId}", HandleUpdateExampleAsync);
         group.MapDelete("{exampleId}", HandleDeleteExampleAsync);
-        group.MapGet(string.Empty, HandleGetExamplesAsync);
 
         group.MapPost("{exampleId}/example_items", HandleCreateExampleItemsAsync);
         group.MapPut("{exampleId}/example_item/{exampleItemId}", HandleUpdateExampleItemAsync);
         group.MapDelete("{exampleId}/example_item/{exampleItemId}", HandleDeleteExampleItemAsync);
 
+        group.MapGet(string.Empty, HandleGetExamplesAsync);
+        
         return builder;
     }
 
@@ -95,10 +96,16 @@ public static class ExampleEndpoint
         string requestId = requestContext.GetIdempotencyKey()
             ?? throw new ArgumentException("X-Request-Id header must be provided for idempotent requests.");
 
+        var exampleItemDtos = request.ExampleItems
+             .Select(exampleItem => new ExampleItemDto(
+                 ExampleText: exampleItem.ExampleText
+             ))
+             .ToList();
+
         var command = new CreateExampleItemsCommand(
             RequestId: requestId,
             ExampleId: exampleId,
-            ExampleItems: request.ExampleItems
+            ExampleItems: exampleItemDtos
         );
 
         var result = await sender.Send(command, ct);

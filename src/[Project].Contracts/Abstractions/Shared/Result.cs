@@ -8,18 +8,11 @@ public abstract class Result
     public static Success Success(string code = "200", string message = "Success")
         => new(code, message);
 
-    public static Success<T> Success<T>(T data, string code = "200", string message = "Success")
+    public static Success<T> Success<T>(T? data = default, string code = "200", string message = "Success")
         => new(data, code, message);
-
-    public static Failure Failure(string code, string message)
-        => new(code, message);
 
     public static Failure Failure(IEnumerable<Error> errors)
         => new(errors);
-
-    public static Failure<T> Failure<T>(T data, string code, string message)
-        => new(data, code, message);
-
-    public static Failure<T> Failure<T>(T data, IEnumerable<Error> errors)
-        => new(data, errors);
+    public static Failure<T> Failure<T>(IEnumerable<Error> errors)
+        => new(errors);
 }

@@ -13,8 +13,6 @@ public sealed class GetExamplesQueryHandler : IQueryHandler<GetExamplesQuery, Pa
 
     public async Task<Result<PageDto<ExampleDto>>> Handle(GetExamplesQuery query, CancellationToken cancellationToken)
     {
-
-        return Result.Failure(code: "", message: "", data: "");
         var pagedEntities = await _exampleAggregateRepo.GetExampleAggregatesAsync(
             exampleId: query.ExampleId,
             exampleText: query.ExampleText,

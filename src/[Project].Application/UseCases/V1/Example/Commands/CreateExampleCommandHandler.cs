@@ -20,8 +20,10 @@ public sealed class CreateExampleCommandHandler : ICommandHandler<CreateExampleC
 
         if (exist == true)
         {
-            return Result.Failure(code: ExampleMessages.DuplicateExampleText.GetMessage().Code,
+            var error = new Error<string>(code: ExampleMessages.DuplicateExampleText.GetMessage().Code,
                                 message: ExampleMessages.DuplicateExampleText.GetMessage().Message, data: command.ExampleText);
+
+            return Result.Failure([error]);
         }
 
         var exampleValueObject = ExampleValueObject.Of(

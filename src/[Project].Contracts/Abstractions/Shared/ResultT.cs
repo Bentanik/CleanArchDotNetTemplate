@@ -2,5 +2,4 @@
 
 public abstract class Result<T> : Result
 {
-    public T? Data { get; protected set; }
 }
