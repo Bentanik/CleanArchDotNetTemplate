@@ -28,7 +28,7 @@ public static class ExampleEndpoint
     }
 
     private static async Task<IResult> HandleCreateExampleAsync(
-        ISender sender,
+        IMessageBus messageBus,
         IRequestContext requestContext,
         [FromBody] CreateExampleRequest request,
         CancellationToken ct)
@@ -42,12 +42,12 @@ public static class ExampleEndpoint
             ExampleValueObjectText: request.ExampleValueObjectText,
             ExampleStatus: request.ExampleStatus
         );
-        var result = await sender.Send(command, ct);
+        var result = await messageBus.Send(command, ct);
         return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleUpdateExampleAsync(
-       ISender sender,
+       IMessageBus messageBus,
        IRequestContext requestContext,
        [FromRoute] Guid exampleId,
        [FromBody] UpdateExampleRequest request,
@@ -64,12 +64,12 @@ public static class ExampleEndpoint
             ExampleStatus: request.ExampleStatus
         );
 
-        var result = await sender.Send(command, ct);
+        var result = await messageBus.Send(command, ct);
         return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleDeleteExampleAsync(
-        ISender sender,
+        IMessageBus messageBus,
         IRequestContext requestContext,
         [FromRoute] Guid exampleId,
         CancellationToken ct)
@@ -82,12 +82,12 @@ public static class ExampleEndpoint
             ExampleId: exampleId
         );
 
-        var result = await sender.Send(command, ct);
+        var result = await messageBus.Send(command, ct);
         return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleCreateExampleItemsAsync(
-        ISender sender,
+        IMessageBus messageBus,
         IRequestContext requestContext,
         [FromRoute] Guid exampleId,
         [FromBody] CreateExampleItemsRequest request,
@@ -108,12 +108,12 @@ public static class ExampleEndpoint
             ExampleItems: exampleItemDtos
         );
 
-        var result = await sender.Send(command, ct);
+        var result = await messageBus.Send(command, ct);
         return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleUpdateExampleItemAsync(
-        ISender sender,
+        IMessageBus messageBus,
         IRequestContext requestContext,
         [FromRoute] Guid exampleId,
         [FromRoute] Guid exampleItemId,
@@ -130,12 +130,12 @@ public static class ExampleEndpoint
             ExampleItemText: request.ExampleItemText
         );
 
-        var result = await sender.Send(command, ct);
+        var result = await messageBus.Send(command, ct);
         return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleDeleteExampleItemAsync(
-        ISender sender,
+        IMessageBus messageBus,
         IRequestContext requestContext,
         [FromRoute] Guid exampleId,
         [FromRoute] Guid exampleItemId,
@@ -150,12 +150,12 @@ public static class ExampleEndpoint
             ExampleItemId: exampleItemId
         );
 
-        var result = await sender.Send(command, ct);
+        var result = await messageBus.Send(command, ct);
         return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleGetExamplesAsync(
-        [FromServices] ISender sender,
+        [FromServices] IMessageBus messageBus,
         [AsParameters] GetExamplesRequest request,
         CancellationToken ct
     )
@@ -170,7 +170,7 @@ public static class ExampleEndpoint
             PageSize: request.PageSize
         );
 
-        var result = await sender.Send(query, ct);
+        var result = await messageBus.Send(query, ct);
         return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 }

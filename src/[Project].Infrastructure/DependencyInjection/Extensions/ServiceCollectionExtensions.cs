@@ -1,6 +1,3 @@
-using _Project_.Application.Interfaces;
-using _Project_.Infrastructure.RequestContext;
-
 namespace _Project_.Infrastructure.DependencyInjection.Extensions;
 
 public static class ServiceCollectionExtensions
@@ -15,6 +12,13 @@ public static class ServiceCollectionExtensions
     {
         services.AddMemoryCache();
         services.AddSingleton<IRequestIdempotencyStore, InMemoryIdempotencyStore>();
+        return services;
+    }
+
+    private static IServiceCollection RegisterMessageBusServices(this IServiceCollection services)
+    {
+        services.AddScoped<IMessageBus, MediatRMessageBus>();
+
         return services;
     }
 
@@ -40,6 +44,7 @@ public static class ServiceCollectionExtensions
         services
             .RegisterDomainEventServices()
             .RegisterExternalServices()
+            .RegisterMessageBusServices()
             .RegisterIdempotencyStoreServices()
             .RegisterRequestContextServices();
 

@@ -19,13 +19,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[Project].Contracts", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "[Project].Presentation", "src\[Project].Presentation\[Project].Presentation.csproj", "{BCCAEEF2-4CBE-4A89-8C24-948D51635E43}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		READMEOld.md = READMEOld.md
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{45716228-E3E5-42DB-9DCE-FCF047761619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -57,6 +60,9 @@ Global
 		{BCCAEEF2-4CBE-4A89-8C24-948D51635E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCCAEEF2-4CBE-4A89-8C24-948D51635E43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{45716228-E3E5-42DB-9DCE-FCF047761619} = {7CAAA1A3-2994-4B27-A54A-07D380EF0966}
 		{CD80FCBF-F351-4C19-8CA5-C9887143DEF1} = {7CAAA1A3-2994-4B27-A54A-07D380EF0966}
@@ -65,5 +71,8 @@ Global
 		{E807B873-EAB9-49BD-96B8-76D1A0285A75} = {7CAAA1A3-2994-4B27-A54A-07D380EF0966}
 		{832427EF-1AFF-4169-9AD1-93D2CCDBBCF4} = {7CAAA1A3-2994-4B27-A54A-07D380EF0966}
 		{BCCAEEF2-4CBE-4A89-8C24-948D51635E43} = {7CAAA1A3-2994-4B27-A54A-07D380EF0966}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A20D0397-F1A8-4D38-B928-5D75E19455CC}
 	EndGlobalSection
 EndGlobal
