@@ -1,4 +1,4 @@
-namespace [Project].API;
+namespace _Project_.API;
 
 internal class Program
 {

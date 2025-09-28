@@ -58,7 +58,7 @@ public sealed class CreateExampleItemsCommandHandler : ICommandHandler<CreateExa
 
         var duplicateDtos = exampleItems
             .GroupBy(dto => dto.ExampleText)
-            .Where(g => g.Count() > 1 || existingTexts.Contains(g.Key))
+            .Where(g => g.Count() > 1 || existingTexts.Contains(g.Key!))
             .SelectMany(g => g)
             .ToList();
 

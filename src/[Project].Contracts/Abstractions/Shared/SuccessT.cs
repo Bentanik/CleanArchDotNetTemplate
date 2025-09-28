@@ -4,9 +4,9 @@ public class Success<T> : Result<T>
 {
     public string Code { get; }
     public string Message { get; }
-    public T Data { get; }
+    public T? Data { get; }
 
-    internal Success(T data, string code, string message)
+    internal Success(T? data, string code, string message)
     {
         IsSuccess = true;
         Code = code;
