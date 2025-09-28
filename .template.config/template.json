@@ -10,11 +10,29 @@
     "identity": "CleanArchEFCoreCQRSDDD",
     "name": "Clean Architecture Template (NET) with EF Core, CQRS, DDD",
     "shortName": "cleanarch-ef-ddd",
-    "sourceName": "_Project_",
+    "sourceName": "[Project]",
     "tags": {
         "language": "C#",
         "type": "project",
         "framework": "NET"
     },
-    "preferNameDirectory": true
+    "preferNameDirectory": true,
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "exclude": [
+                        ".git/**",
+                        ".github/**",
+                        ".gitignore",
+                        ".gitattributes",
+                        ".vs/**",
+                        "**/.vs/**",
+                        "**/bin/**",
+                        "**/obj/**"
+                    ]
+                }
+            ]
+        }
+    ]
 }
