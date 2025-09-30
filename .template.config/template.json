@@ -3,13 +3,12 @@
     "author": "Bentanik",
     "classifications": [
         "Clean Architecture",
-        "EF Core",
         "CQRS",
         "DDD"
     ],
-    "identity": "CleanArchEFCoreCQRSDDD",
-    "name": "Clean Architecture Template (NET) with EF Core, CQRS, DDD",
-    "shortName": "cleanarch-ef-ddd",
+    "identity": "CleanArchCoreCQRSDDD",
+    "name": "Clean Architecture Template (NET) with CQRS, DDD",
+    "shortName": "cleanarch-cqrs-ddd",
     "sourceName": "[Project]",
     "tags": {
         "language": "C#",
