@@ -12,6 +12,6 @@ public class AppDbContext : DbContext
         base.OnConfiguring(optionsBuilder);
     }
 
-    public DbSet<ExampleAggregate> Examples { get; set; }
-    public DbSet<ExampleItemEntity> ExampleItems { get; set; }
+    public DbSet<ExampleAggregate> Examples { get; set; } = default!;
+    public DbSet<ExampleItemEntity> ExampleItems { get; set; } = default!;
 }
