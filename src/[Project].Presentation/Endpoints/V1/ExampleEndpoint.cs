@@ -43,7 +43,7 @@ public static class ExampleEndpoint
             ExampleStatus: request.ExampleStatus
         );
         var result = await messageBus.Send(command, ct);
-        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+        return Results.Ok(result);
     }
 
     private static async Task<IResult> HandleUpdateExampleAsync(
@@ -65,7 +65,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+        return Results.Ok(result);
     }
 
     private static async Task<IResult> HandleDeleteExampleAsync(
@@ -83,7 +83,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+        return Results.Ok(result);
     }
 
     private static async Task<IResult> HandleCreateExampleItemsAsync(
@@ -109,7 +109,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+        return Results.Ok(result);
     }
 
     private static async Task<IResult> HandleUpdateExampleItemAsync(
@@ -131,7 +131,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+        return Results.Ok(result);
     }
 
     private static async Task<IResult> HandleDeleteExampleItemAsync(
@@ -171,6 +171,6 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(query, ct);
-        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
+        return Results.Ok(result);
     }
 }
