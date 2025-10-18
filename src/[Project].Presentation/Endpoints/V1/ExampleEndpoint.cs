@@ -26,7 +26,16 @@ public static class ExampleEndpoint
         
         return builder;
     }
+    public static IVersionedEndpointRouteBuilder MapExampleEndpointApiV2(this IVersionedEndpointRouteBuilder builder)
+    {
+        var group = builder
+            .MapGroup($"/api/v{{version:apiVersion}}/{EndpointName}")
+            .HasApiVersion(2);
 
+        group.MapGet(string.Empty, HandleGetExamplesAsync);
+
+        return builder;
+    }
     private static async Task<IResult> HandleCreateExampleAsync(
         IMessageBus messageBus,
         IRequestContext requestContext,
