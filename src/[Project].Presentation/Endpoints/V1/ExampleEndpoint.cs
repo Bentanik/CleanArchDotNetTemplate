@@ -23,26 +23,17 @@ public static class ExampleEndpoint
         group.MapDelete("{exampleId}/example_item/{exampleItemId}", HandleDeleteExampleItemAsync);
 
         group.MapGet(string.Empty, HandleGetExamplesAsync);
-        
-        return builder;
-    }
-    public static IVersionedEndpointRouteBuilder MapExampleEndpointApiV2(this IVersionedEndpointRouteBuilder builder)
-    {
-        var group = builder
-            .MapGroup($"/api/v{{version:apiVersion}}/{EndpointName}")
-            .HasApiVersion(2);
-
-        group.MapGet(string.Empty, HandleGetExamplesAsync);
 
         return builder;
     }
+
     private static async Task<IResult> HandleCreateExampleAsync(
         IMessageBus messageBus,
         IRequestContext requestContext,
         [FromBody] CreateExampleRequest request,
         CancellationToken ct)
     {
-        string requestId = requestContext.GetIdempotencyKey() 
+        string requestId = requestContext.GetIdempotencyKey()
             ?? throw new ArgumentException("X-Request-Id header must be provided for idempotent requests.");
 
         var command = new CreateExampleCommand(
@@ -52,7 +43,7 @@ public static class ExampleEndpoint
             ExampleStatus: request.ExampleStatus
         );
         var result = await messageBus.Send(command, ct);
-        return Results.Ok(result);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleUpdateExampleAsync(
@@ -74,7 +65,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return Results.Ok(result);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleDeleteExampleAsync(
@@ -92,7 +83,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return Results.Ok(result);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleCreateExampleItemsAsync(
@@ -118,7 +109,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return Results.Ok(result);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleUpdateExampleItemAsync(
@@ -140,7 +131,7 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(command, ct);
-        return Results.Ok(result);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 
     private static async Task<IResult> HandleDeleteExampleItemAsync(
@@ -180,6 +171,6 @@ public static class ExampleEndpoint
         );
 
         var result = await messageBus.Send(query, ct);
-        return Results.Ok(result);
+        return result.IsFailure ? Results.BadRequest(result) : Results.Ok(result);
     }
 }
