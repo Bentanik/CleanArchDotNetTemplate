@@ -10,13 +10,13 @@ public static class MiddlewareExtensions
         {
         }
 
-        app.ConfigureSwagger();
+        
 
         app.MapCarter();
 
         app.NewVersionedApi()
-          .MapExampleEndpointApiV1();
-
+          .MapExampleEndpointApiV1().MapExampleEndpointApiV2();
+        app.ConfigureSwagger();
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         app.UseHttpsRedirection();
